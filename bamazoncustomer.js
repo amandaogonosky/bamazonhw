@@ -56,24 +56,24 @@ connection.connect(function(err) {
               }
             ])
             .then(function(answer) {
-              var chosenItem;
+              var shoppinCart;
               for (var i = 0; i < results.length; i++) {
                 if (results[i].product_name === answer.choice) {
-                  chosenItem = results[i];
+                  shoppinCart = results[i];
                  
                 }
               }
-              if (chosenItem.stock_quantity > answer.quantity){
+              if (shoppinCart.stock_quantity > answer.quantity){
     
             //   console.log("all out,sorry");    
                 connection.query(
                   "UPDATE products SET ? WHERE ?",
                   [
                     {
-                      stock_quantity: (chosenItem.stock_quantity - answer.quantity)
+                      stock_quantity: (shoppinCart.stock_quantity - answer.quantity)
                     },
                     {
-                      item_id: chosenItem.item_id
+                      item_id: shoppinCart.item_id
                     },
                     
                   ],
